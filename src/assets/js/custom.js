@@ -11,7 +11,7 @@
         });
         
         // Toggle Sidebar Submenu
-        const sidebarMenuItems = document.querySelectorAll('.sidebar .has-submenu');
+        const sidebarMenuItems = document.querySelectorAll('.sidebar' );
         
         sidebarMenuItems.forEach(item => {
             item.addEventListener('click', function(e) {

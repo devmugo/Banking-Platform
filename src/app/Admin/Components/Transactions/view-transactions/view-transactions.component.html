@@ -1,0 +1,36 @@
+<div class="main-content">
+    <div class="container-fluid"> 
+  
+  
+  <div >
+  <table class="table table-striped table-dark">
+      <thead>
+        <tr>          
+          <th scope="col"> Id </th>
+          <th scope="col"> Transaction Decription </th>    
+          <th scope="col"> Action</th>                  
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let trans of transactions; index as i" >        
+        <td>{{ i + 1 }}</td>
+        <td>
+          <p *ngIf="trans.transactionType.startsWith('D') "> {{ trans.transactionType}} of  Kshs {{ trans.amountInvolved}}  to  Account Number {{ trans.accountTo}} ({{ trans.accountToOwner}}  )  on {{ trans.transactionDate}}</p>
+           <p *ngIf="trans.transactionType.startsWith('W')"> {{ trans.transactionType}} of  Kshs {{ trans.amountInvolved}}  from   Account Number {{ trans.accountFrom }} ({{ trans.accountFromOwner}}) 
+             on {{ trans.transactionDate}}</p>
+            <p *ngIf="trans.transactionType.startsWith('F')"> {{ trans.transactionType}} of  Kshs {{ trans.amountInvolved}}  from   Account Number {{ trans.accountFrom }} ({{ trans.accountFromOwner}}) 
+              to  Account Number {{ trans.accountTo}} ({{ trans.accountToOwner}}  )  on {{ trans.transactionDate}}</p>
+        </td>
+        <td> 
+          <button type="button" class="btn btn-primary btn-sm mx-1"> View </button>
+        </td>
+
+        </tr>   
+        
+      </tbody>
+    </table>
+  </div>
+  </div>
+  </div>
+  
+  

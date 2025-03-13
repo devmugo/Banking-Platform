@@ -1,0 +1,80 @@
+<div class="main-content">
+    <div class="container-fluid">    
+
+<div class="row mb-4">
+    <div class="col-12">
+        <h2> Welcome {{username}}</h2>    
+    </div>
+</div>
+
+<div class=" row mb-3 ">
+    <div *ngFor="let acc of accounts" class="col-sm-6 " >
+        <div class="card px-2 ">
+            <div class="card-icon text-primary">
+                <i class="fa-solid fa-coins"></i>
+            </div>
+            <p class="stat-label"> Account Number : {{acc.accountNumber}} </p>  
+            <p class="stat-label"> Account Type : {{acc.accountType}} </p>  
+            <div class="stat-value"> Balance : {{acc.currency}}  {{acc.accountBalance}}</div>                    
+            
+        </div>
+        
+    </div>  
+    
+    <div *ngIf="accounts.length==0" class="col-sm-6 ">
+        <div class="card">
+            <div class="card-icon text-primary">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>             
+            <div class="stat-value"> You dont have an account Yet . <br>
+                 Contact The Bank to open an account </div>                    
+            
+        </div>
+        
+    </div> 
+   
+</div>
+
+    <div class="card mx-2 ">
+        <div class="card-header">
+            <h4> Mini Statement </h4>
+        </div>
+        <div class="card-body">
+            <table class="table  table-striped">
+                <thead>
+                    <tr>
+                        <th>Transaction ID</th>
+                        <th>Transaction  Description </th>                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor=" let trans of transactions; let i = index;">
+                        <td>{{i + 1 }}</td>  
+                        <td>
+                            
+                            <p *ngIf="trans.transactionType.startsWith('D') "> {{ trans.transactionType}} of  Kshs {{ trans.amountInvolved}}  to  Account Number {{ trans.accountTo}} ({{ trans.accountToOwner}}  )  on {{ trans.transactionDate}}</p>
+                            <p *ngIf="trans.transactionType.startsWith('W')"> {{ trans.transactionType}} of  Kshs {{ trans.amountInvolved}}  from   Account Number {{ trans.accountFrom }} ({{ trans.accountFromOwner}}) 
+                              on {{ trans.transactionDate}}</p>
+                             <p *ngIf="trans.transactionType.startsWith('F')"> {{ trans.transactionType}} of  Kshs {{ trans.amountInvolved}}  from   Account Number {{ trans.accountFrom }} ({{ trans.accountFromOwner}}) 
+                               to  Account Number {{ trans.accountTo}} ({{ trans.accountToOwner}}  )  on {{ trans.transactionDate}}</p>
+
+
+                        </td>                       
+                    </tr>
+
+                </tbody>
+                </table>
+      
+   
+    </div>
+    </div>
+    
+    
+    
+      
+   
+
+</div>
+
+</div>
+

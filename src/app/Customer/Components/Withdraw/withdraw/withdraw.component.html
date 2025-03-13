@@ -1,0 +1,55 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="col-sm-6 " >
+            <div class="card px-2 ">
+
+                <form #wdForm (submit)="onSubmit(wdForm)" > 
+                    <p *ngIf="message" class="text-centre text-danger " > {{message}}</p>
+                <div class="form-outline mt-2">
+                <label class="form-label" for="form7Example1" data-mdb-select-init multiple data-mdb-clear-button="true"> Select an Account </label>
+                <select class="form-select border border-dark mb-2" name="account" [(ngModel)]="accountNumber" (change)="accountSelect($event)" >
+                  <option disabled [defaultSelected]="true" > Select An Option  </option>
+                  <option *ngFor="let acc of accounts" value="{{acc.accountNumber}}"  > {{acc.accountNumber}} </option>                                                 
+                </select>
+                </div> 
+                <div class="form-outline mt-2">
+                    <label class="form-label" for="form8Example2"> Available Balance   </label>
+                    <div class="input-group"> 
+                    <span class="input-group-text bg-secondary ">{{currency}}</span>                    
+                    <input type="text" id="form8Example2" class="form-control border border-dark " name="acbalance" [(ngModel)]="availablebalance" disabled="true"/>                    
+                  </div>
+                </div>
+                <div class="form-outline mt-2">
+                    <label class="form-label" for="form8Example2"> Account Type  </label>
+                    <input type="text" id="form8Example2" class="form-control border border-dark " name="actype" [(ngModel)]="accounttype" disabled="true"/>                    
+                  </div>
+                  
+                  <div class="form-outline mt-2 mb-4">
+                <label class="form-label" for="form8Example5"> Amount to withdraw </label>
+                <div class="input-group">                    
+                    <span class="input-group-text bg-secondary ">{{currency}}</span>
+                    <input type="text" class="form-control border-dark" placeholder="Enter amount to Withdraw" 
+                    [(ngModel)]="amounttobewithdrawn" name="withdrawamount" >
+                  </div>
+                </div>
+
+                <div >                         
+                    <button type="submit" class="btn btn-primary w-100 " > Withdraw </button>            
+                    
+                  </div>
+
+                </form>
+                        
+               
+            </div>
+            
+        </div> 
+
+
+   
+</div>
+</div>
+
+
+
+

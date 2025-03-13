@@ -1,0 +1,27 @@
+.search-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid #0f0d0d;  
+    border-radius: 4px; 
+    
+   
+}
+
+.search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    height: 36px;
+    
+    
+}
+
+.search-icon {
+    color: #888;
+    cursor: pointer;
+    padding: 1px;
+}
+
+.search-icon:hover {
+    color: #000;
+}
