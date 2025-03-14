@@ -6,6 +6,7 @@ import { Customer } from 'src/app/Customer/Models/Customer/customer';
 import { User } from '../../Models/Users/user';
 import { Transaction } from 'src/app/Customer/Models/Transaction/transaction';
 import { Log } from '../../Models/Logs/log';
+import { Notification } from 'src/app/Customer/Models/Notifications/notification';
 
 @Injectable({
   providedIn: 'root'
@@ -73,4 +74,20 @@ export class GetServicesService {
         });
       });
     }
+
+    getNotificationsByAccount(account: Account ): Observable<any[]> {
+      return new Observable((observer) => {
+        this.dbService.getAll('notifications').subscribe({
+          next: (notifications) => {
+            // Filter transactions where transaction.account matches the given account
+            const filterednotifications = (notifications as Notification[]).filter(notification => notification.to === account.accountNumber && notification.read === false );
+            observer.next(filterednotifications);
+            observer.complete();
+          },
+          error: (err) => observer.error(err)
+        });
+      });
+    }
+
+   
 }

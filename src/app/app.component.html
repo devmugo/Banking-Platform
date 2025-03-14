@@ -6,10 +6,21 @@
                 <i class="fas fa-bars"></i>
             </span>
             <a class="navbar-brand fw-bold" href="#"></a>
-        </div>        
+        </div>       
                    
           
-            <div class="d-flex justify-content-end">             
+            <div class="d-flex justify-content-end">    
+              <div class="d-flex align-items-center px-3">
+                <div class="dropdown">
+                    <button *ngIf="noOfNotifications" class="nav-link position-relative"  
+                    data-bs-toggle="modal" data-bs-target="#viewnotsmodal">
+                        <i class="fas fa-bell"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger notification-badge">
+                            {{noOfNotifications}}
+                        </span>
+                      </button>                    
+                </div>
+                </div>         
                 
                 <div class="dropdown ms-auto ">
                     <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" 
@@ -105,6 +116,32 @@
     
 </div>
 </div>
+
+<div class="modal fade" id="viewnotsmodal" tabindex="-1" role="dialog" aria-labelledby="viewnotsmodalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title " id="exampleModalLabel">Notifications </h5>
+        <button type="button" class="btn-close" data-mdb-ripple-init data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>      
+        
+      <div class="modal-body"> 
+        <div *ngFor="let nots of notifications" >
+          {{nots.message}}
+          <hr>  
+        </div>   
+            
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="readNotifications()" class="btn btn-primary" data-ripple-init>Mark as Read </button>
+        <button type="button" class="btn btn-danger" data-ripple-init data-bs-dismiss="modal">Cancel </button>
+        
+      </div>
+    
+    </div>
+  </div>
+  </div>
 
 <router-outlet></router-outlet>  
 <!-- Main Content -->

@@ -62,6 +62,7 @@ export class DashboardComponent implements OnInit {
     this.getservice.getTransactionsByAccount(this.accounts[0]).subscribe(
       (response) =>  {
         this.transactions = response
+        this.transactions = this.transactions.reverse()
         
       }    
     );    

@@ -6,6 +6,7 @@ import { Customer } from 'src/app/Customer/Models/Customer/customer';
 import { User } from '../../Models/Users/user';
 import { Transaction } from 'src/app/Customer/Models/Transaction/transaction';
 import { LogDTO } from '../../Models/Logs/log-dto';
+import { Notification } from 'src/app/Customer/Models/Notifications/notification';
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +45,14 @@ export class PostServicesService {
   addLog( log: LogDTO ): Observable<any> {   
     return this.dbService.add('logs', log);  
     
+  }
+
+  addNotification (notification : Notification) :  Observable<any> {   
+    return this.dbService.add('notifications', notification);  
+    
+  }
+  updateNotification(notification: Notification ): Observable<any> {
+    return this.dbService.update('notifications', notification);
   }
 
   

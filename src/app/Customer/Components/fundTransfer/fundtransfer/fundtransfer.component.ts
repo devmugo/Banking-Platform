@@ -6,6 +6,7 @@ import { Account } from 'src/app/Customer/Models/Account/account';
 import { Customer } from 'src/app/Customer/Models/Customer/customer';
 import { Transaction } from 'src/app/Customer/Models/Transaction/transaction';
 import { CustomerService } from 'src/app/Customer/Services/Customer/customer.service';
+import { Notification } from 'src/app/Customer/Models/Notifications/notification';
 
 @Component({
   selector: 'app-fundtransfer',
@@ -28,7 +29,9 @@ export class FundtransferComponent {
   debitAccountNo: string = ""
   accountnotfounderror = ""
   transactionerror = ""
-   transaction : Transaction = new Transaction("","",0,"","","","",)
+  transaction : Transaction = new Transaction("","",0,"","","","",)
+  notification : Notification = new Notification ("","",false)
+
 
    constructor(private postservice : PostServicesService, private authService:AuthService ,
          private getservice : GetServicesService , private custservice : CustomerService) {}
@@ -88,18 +91,7 @@ export class FundtransferComponent {
     this.postservice.debitAccount(this.creditAccount).subscribe(
       (response) =>  {
          
-        this.postservice.debitAccount(this.debitAccount).subscribe(
-          (response) =>  {                         
-          },
-          (error) => {   
-            console.log(error)       
-            
-          }
-        );            
-      },
-      (error) => {   
-        console.log(error)       
-        
+        this.postservice.debitAccount(this.debitAccount).subscribe();            
       }
     );
 
@@ -111,11 +103,16 @@ export class FundtransferComponent {
     + " " + this.debitAccount.accountHolder.lastName
     this.transaction.amountInvolved = this.transferAmount
     this.transaction.transactionDate = this.getCurrentDateTime()
-    this.transaction.transactionType = "Fund Transfer"       
+    this.transaction.transactionType = "Fund Transfer"   
 
-    this.postservice.addTransaction(this.transaction).subscribe(
-      (response) =>  {   
-        console.log("Transaction Completed ")
+    this.notification.to = this.debitAccount.accountNumber
+    this.notification.message = "Received sum of Kshs "  + this.transferAmount + " from " + this.creditAccount.accountNumber + "( "  + this.creditAccount.accountHolder.firstName + " " + 
+    this.creditAccount.accountHolder.lastName + " )" 
+    this.notification.read = false    
+
+    this.postservice.addTransaction(this.transaction).subscribe()
+    this.postservice.addNotification(this.notification).subscribe(
+      (response) =>  {           
         window.location.href = '/customerdashboard';             
     
       },
